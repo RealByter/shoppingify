@@ -112,10 +112,13 @@ const Login = () => {
             {login ? "Login" : "Signup"}
             <Ripple color="#FFF0DE" duration={1500} />
           </button>
-          <p>
+          <p className="-mt-5">
             {login ? "Don't have an account?" : "Already have an account?"}{" "}
-            <a onClick={() => setLogin((oldState) => !oldState)}>
-              {login ? "Signup" : "Login"}
+            <a
+              onClick={() => setLogin((oldState) => !oldState)}
+              className="cursor-pointer text-primary hover:underline focus-visible:underline"
+            >
+              {login ? "Sign up" : "Login"}
             </a>
           </p>
         </form>
