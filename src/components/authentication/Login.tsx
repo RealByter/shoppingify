@@ -56,17 +56,28 @@ const Login = () => {
     }
   };
 
+  const onCloseModal = () => {
+    setModal("");
+  };
+
   return (
     <>
       <LoadingSpinner loading={loading} />
       <Modal
         title={login ? "Login error" : "Sign up error"}
         description={modal}
-        onClose={() => {
-          setModal("");
-        }}
+        onClose={onCloseModal}
         open={!!modal}
-      />
+      >
+        <div className="mt-4">
+          <button
+            onClick={onCloseModal}
+            className="inline-flex justify-center rounded-md border border-transparent bg-orange-100 px-4 py-2 text-sm font-medium text-orange-900 hover:bg-orange-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2"
+          >
+            Close
+          </button>
+        </div>
+      </Modal>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input

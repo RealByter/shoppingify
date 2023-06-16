@@ -50,14 +50,6 @@ const Modal: React.FC<Props> = ({
                 <p className="text-sm text-gray-500">{description}</p>
               </Dialog.Description>
               {children}
-              <div className="mt-4">
-                <button
-                  onClick={onClose}
-                  className="inline-flex justify-center rounded-md border border-transparent bg-orange-100 px-4 py-2 text-sm font-medium text-orange-900 hover:bg-orange-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2"
-                >
-                  Close
-                </button>
-              </div>
             </Dialog.Panel>
           </Transition.Child>
         </div>
