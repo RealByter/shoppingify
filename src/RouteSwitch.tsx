@@ -13,12 +13,18 @@ const RouteSwitch = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {signInCheckResult.signedIn ? (
-          "Logged in"
-        ) : (
-          <Route path="/" element={<Login />} />
+        {!signInCheckResult.signedIn && (
+          <Route path="/login" element={<Login />} />
         )}
-        <Route path="*" element={<Navigate to="/" />} />
+        {signInCheckResult.signedIn && (
+          <Route path="/" element={<p>Logged in</p>} />
+        )}
+        <Route
+          path="*"
+          element={
+            <Navigate to={signInCheckResult.signedIn ? "/" : "/login"} />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
