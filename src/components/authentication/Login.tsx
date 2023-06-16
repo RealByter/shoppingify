@@ -9,6 +9,7 @@ import {
 import { FirebaseError } from "firebase/app";
 import LoadingSpinner from "../general/LoadingSpinner";
 import Modal from "../general/Modal";
+import Ripple from "../general/Ripple";
 
 interface FormData {
   email: string;
@@ -78,8 +79,11 @@ const Login = () => {
           </button>
         </div>
       </Modal>
-      <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="p-6">
+        <h1 className="mb-16 mt-4 text-center text-5xl font-light text-primary">
+          Shoppingify
+        </h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
           <Input
             register={register}
             rules={{
@@ -101,7 +105,13 @@ const Login = () => {
             label="Password"
             errorMessage={errors.password?.message}
           />
-          <button type="submit">{login ? "Login" : "Signup"}</button>
+          <button
+            type="submit"
+            className="relative mt-2 w-full cursor-pointer rounded-xl bg-primary py-2 text-base font-bold text-white"
+          >
+            {login ? "Login" : "Signup"}
+            <Ripple color="#FFF0DE" duration={1500} />
+          </button>
           <p>
             {login ? "Don't have an account?" : "Already have an account?"}{" "}
             <a onClick={() => setLogin((oldState) => !oldState)}>
