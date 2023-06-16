@@ -2,11 +2,11 @@ import React from "react";
 import { RegisterOptions } from "react-hook-form";
 
 interface Props {
-  type: string;
+  type?: string;
   placeholder: string;
   register: any;
   label: string;
-  errorMessage: string;
+  errorMessage: string | undefined;
   rules: RegisterOptions;
 }
 
@@ -25,7 +25,7 @@ const Input: React.FC<Props> = ({
         <input
           type={type}
           placeholder={placeholder}
-          {...(register && register(label, rules))}
+          {...(register && register(label.toLowerCase(), rules))}
         />
       </label>
       <p>{errorMessage && `* ${errorMessage}`}</p>
