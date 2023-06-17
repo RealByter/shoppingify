@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
 import Login from "../authentication/Login";
 import { useSigninCheck } from "reactfire";
 import NavBar from "./NavBar";
@@ -12,7 +12,7 @@ const RouteSwitch = () => {
   }
 
   return (
-    <BrowserRouter basename={import.meta.env.DEV ? "/" : "/shoppingify/"}>
+    <HashRouter basename={import.meta.env.DEV ? "/" : "/shoppingify/"}>
       <div className="flex">
         {signInCheckResult.signedIn && <NavBar />}
         <div className="grow">
@@ -30,7 +30,7 @@ const RouteSwitch = () => {
           </Switch>
         </div>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
