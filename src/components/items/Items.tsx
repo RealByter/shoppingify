@@ -25,7 +25,7 @@ const Items = () => {
     where("userId", "==", signInCheckResult.user?.uid)
   );
   const { status, data: items } = useFirestoreCollectionData(itemsQuery, {
-    idField: "_id",
+    idField: "id",
   });
 
   if (status === "loading") {

@@ -1,7 +1,6 @@
 {
   "name": "template-vite-react-ts-tailwind-v3",
   "version": "0.0.0",
-  "homepage": "https://realbyter.github.io/shoppingify",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
@@ -11,12 +10,13 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",
+    "@types/react-router-dom": "^5.3.3",
     "firebase": "^9.22.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.44.3",
     "react-icons": "^4.9.0",
-    "react-router-dom": "^6.13.0",
+    "react-router-dom": "^5.3.0",
     "reactfire": "^4.2.2"
   },
   "devDependencies": {

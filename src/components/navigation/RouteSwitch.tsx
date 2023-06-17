@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Login from "../authentication/Login";
 import { useSigninCheck } from "reactfire";
 import NavBar from "./NavBar";
@@ -12,24 +12,22 @@ const RouteSwitch = () => {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.DEV ? "/" : "/shoppingify/"}>
       <div className="flex">
         {signInCheckResult.signedIn && <NavBar />}
         <div className="grow">
-          <Routes>
+          <Switch>
             {!signInCheckResult.signedIn && (
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" component={Login} />
             )}
-            {signInCheckResult.signedIn && (
-              <Route path="/" element={<Items />} />
-            )}
+            {signInCheckResult.signedIn && <Route path="/" component={Items} />}
             <Route
               path="*"
-              element={
-                <Navigate to={signInCheckResult.signedIn ? "/" : "/login"} />
-              }
+              component={() => (
+                <Redirect to={signInCheckResult.signedIn ? "/" : "/login"} />
+              )}
             />
-          </Routes>
+          </Switch>
         </div>
       </div>
     </BrowserRouter>
