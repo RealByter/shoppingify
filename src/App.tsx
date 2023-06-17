@@ -1,7 +1,8 @@
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { AuthProvider, FirestoreProvider, useFirebaseApp } from "reactfire";
-import RouteSwitch from "./RouteSwitch";
+import RouteSwitch from "./components/navigation/RouteSwitch";
+import "./App.css";
 
 const App = () => {
   const app = useFirebaseApp();
