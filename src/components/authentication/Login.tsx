@@ -79,11 +79,14 @@ const Login = () => {
           </button>
         </div>
       </Modal>
-      <div className="p-6">
-        <h1 className="mb-16 mt-4 text-center text-5xl font-light text-primary">
+      <div className="mx-auto p-6">
+        <h1 className="mb-20 mt-4 text-center text-5xl font-light text-primary">
           Shoppingify
         </h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="mx-auto flex max-w-xs flex-col gap-6"
+        >
           <Input
             register={register}
             rules={{
