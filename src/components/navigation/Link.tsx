@@ -11,12 +11,8 @@ interface Props {
 const Link: React.FC<Props> = ({ to, tooltip, Icon }) => (
   <NavLink
     to={to}
-    className={({ isActive }) =>
-      `group relative block px-4 py-8 sm:px-6 ${
-        isActive &&
-        "before:absolute before:left-0 before:top-1/2 before:h-12 before:w-1.5 before:-translate-y-1/2 before:rounded-r-lg before:bg-primary"
-      }`
-    }
+    activeClassName="before:absolute before:left-0 before:top-1/2 before:h-12 before:w-1.5 before:-translate-y-1/2 before:rounded-r-lg before:bg-primary"
+    className="group relative block px-4 py-8 sm:px-6"
   >
     <Icon className="text-2xl" />
     <Ripple color="#dddddd" duration={1000} />
