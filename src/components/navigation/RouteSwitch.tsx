@@ -12,21 +12,19 @@ const RouteSwitch = () => {
   }
 
   return (
-    <HashRouter basename={import.meta.env.DEV ? "/" : "/shoppingify/"}>
+    <HashRouter basename={import.meta.env.DEV ? "/#" : "/shoppingify/"}>
       <div className="flex">
         {signInCheckResult.signedIn && <NavBar />}
         <div className="grow">
           <Switch>
             {!signInCheckResult.signedIn && (
-              <Route path="#/login" component={Login} />
+              <Route path="/login" component={Login} />
             )}
-            {signInCheckResult.signedIn && (
-              <Route path="#/" component={Items} />
-            )}
+            {signInCheckResult.signedIn && <Route path="/" component={Items} />}
             <Route
               path="*"
               component={() => (
-                <Redirect to={signInCheckResult.signedIn ? "#/" : "#/login"} />
+                <Redirect to={signInCheckResult.signedIn ? "/" : "/login"} />
               )}
             />
           </Switch>
