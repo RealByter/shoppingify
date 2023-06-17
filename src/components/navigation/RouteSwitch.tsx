@@ -12,7 +12,7 @@ const RouteSwitch = () => {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/shoppingify">
       <div className="flex">
         {signInCheckResult.signedIn && <NavBar />}
         <Routes>
