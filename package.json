@@ -1,6 +1,7 @@
 {
   "name": "template-vite-react-ts-tailwind-v3",
   "version": "0.0.0",
+  "homepage": "https://realbyter.github.io/shoppingify",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
