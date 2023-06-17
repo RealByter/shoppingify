@@ -23,7 +23,7 @@ const Input: React.FC<Props> = ({
       <label className="flex flex-col text-sm font-medium focus-within:text-primary">
         {label}
         <input
-          className="mt-1 rounded-xl border-2 border-solid border-gray-400 px-3 py-4 text-black placeholder:text-gray-400 focus:border-primary"
+          className="mt-1 rounded-xl border-2 border-solid border-gray-400 px-3 py-4 text-black outline-none placeholder:text-gray-400 focus:border-primary"
           type={type}
           placeholder={placeholder}
           {...(register && register(label.toLowerCase(), rules))}
