@@ -26,7 +26,7 @@ const Button: React.FC<Props> = ({
     onClick={onClick}
     className={`${
       textColor ? textColor : "text-white"
-    } relative h-16 w-24 overflow-hidden rounded-xl ${
+    } relative overflow-hidden rounded-xl px-6 py-5 ${
       color ? color : "bg-primary"
     }`}
   >

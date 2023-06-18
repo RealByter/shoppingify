@@ -1,9 +1,14 @@
 import { useForm } from "react-hook-form";
 import Input from "../general/Input";
 import SideCard from "../general/SideCard";
+import { CollectionReference, DocumentData, addDoc } from "firebase/firestore";
+import { FirebaseError } from "firebase/app";
+import Button from "../general/Button";
 
 interface Props {
   onClose(): any;
+  collectionRef: CollectionReference<DocumentData>;
+  doesItemExist(name: string): boolean;
 }
 
 interface FormData {
@@ -13,18 +18,37 @@ interface FormData {
   category: string;
 }
 
-const CreateItemForm: React.FC<Props> = ({ onClose }) => {
+const CreateItemForm: React.FC<Props> = ({
+  onClose,
+  collectionRef,
+  doesItemExist,
+}) => {
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm<FormData>();
 
+  const onSubmitHandler = (data: FormData) => {
+    if (doesItemExist(data.name)) {
+      //TODO: show error
+    } else {
+      addDoc(collectionRef, data).catch((e) => {
+        if (e instanceof FirebaseError) {
+          //TODO: show error
+        }
+      });
+      onClose();
+    }
+  };
+
   return (
-    <SideCard className="bg-[#fafafe] p-8">
-      <h3 className="text-2xl font-medium"></h3>
-      <div>
+    <SideCard className="flex flex-col bg-[#fafafe] p-8">
+      <h3 className="text-2xl font-medium">Add a new item</h3>
+      <form
+        onSubmit={handleSubmit(onSubmitHandler)}
+        className="mt-8 flex grow flex-col gap-5"
+      >
         <Input
           register={register}
           rules={{
@@ -58,11 +82,25 @@ const CreateItemForm: React.FC<Props> = ({ onClose }) => {
         <Input
           register={register}
           placeholder="Enter a category"
+          rules={{
+            required: "this is required",
+          }}
           type="select"
           label="Category"
           errorMessage={errors.category?.message}
         />
-      </div>
+        <div className="mt-auto flex justify-center gap-6">
+          <Button
+            onClick={onClose}
+            textColor="text-black"
+            color="bg-transparent"
+            rippleColor="#dddddd"
+          >
+            Cancel
+          </Button>
+          <Button type="submit">Save</Button>
+        </div>
+      </form>
     </SideCard>
   );
 };
