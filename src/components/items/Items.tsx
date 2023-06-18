@@ -33,9 +33,10 @@ const Items = () => {
   }
 
   return (
-    <div>
-      {categories.map((category: string) => (
+    <div className="mx-auto max-w-5xl">
+      {categories.map((category: string, index: number) => (
         <Category
+          key={index}
           name={category}
           items={
             items.filter(
