@@ -27,7 +27,7 @@ const Input: React.FC<Props> = ({
         {label} {!rules?.required && "(optional)"}
         {type === "textarea" ? (
           <textarea
-            className={className + " h-24"}
+            className={className + " h-24 resize-none"}
             type={type}
             placeholder={placeholder}
             {...(register && register(label.toLowerCase(), rules))}
