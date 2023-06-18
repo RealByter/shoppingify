@@ -12,7 +12,7 @@ const RouteSwitch = () => {
   }
 
   return (
-    <HashRouter basename={import.meta.env.DEV ? "/#" : "/shoppingify/"}>
+    <HashRouter basename={import.meta.env.DEV ? "/" : "/shoppingify/"}>
       <div className="flex">
         {signInCheckResult.signedIn && <NavBar />}
         <div className="grow">
