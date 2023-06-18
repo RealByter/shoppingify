@@ -12,9 +12,9 @@ const Category: React.FC<Props> = ({ name, items }) => {
   if (items.length === 0) return <div></div>;
 
   return (
-    <div>
+    <div className="p-3">
       <h3>{name}</h3>
-      <div>
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-x-2 gap-y-6">
         {items.map((item) => (
           <Item {...item} key={item.id} />
         ))}
