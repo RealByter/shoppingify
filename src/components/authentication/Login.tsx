@@ -24,7 +24,6 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm<FormData>();
 

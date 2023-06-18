@@ -7,7 +7,7 @@ interface Props {
   register: any;
   label: string;
   errorMessage: string | undefined;
-  rules: RegisterOptions;
+  rules?: RegisterOptions;
 }
 
 const Input: React.FC<Props> = ({
@@ -24,7 +24,7 @@ const Input: React.FC<Props> = ({
   return (
     <div className="relative">
       <label className="flex flex-col text-sm font-medium focus-within:text-primary">
-        {label} {!rules.required && "(optional)"}
+        {label} {!rules?.required && "(optional)"}
         {type === "textarea" ? (
           <textarea
             className={className + " h-24"}
