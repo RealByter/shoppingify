@@ -9,7 +9,9 @@ const SideCard: React.FC<Props> = ({ children, className }) => (
       " " +
       className
     }
-  ></div>
+  >
+    {children}
+  </div>
 );
 
 export default SideCard;
