@@ -33,7 +33,7 @@ const Items = () => {
   }
 
   return (
-    <div className="mx-auto max-w-5xl">
+    <div className="mx-auto max-w-5xl p-3">
       {categories.map((category: string, index: number) => (
         <Category
           key={index}
