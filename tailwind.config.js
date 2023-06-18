@@ -7,8 +7,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("@headlessui/tailwindcss")({ prefix: "ui" }),
-    require("tailwind-scrollbar"),
-  ],
+  plugins: [require("@headlessui/tailwindcss")({ prefix: "ui" })],
 };
