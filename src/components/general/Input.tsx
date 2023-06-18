@@ -18,16 +18,28 @@ const Input: React.FC<Props> = ({
   errorMessage,
   rules,
 }) => {
+  const className =
+    "mt-1 rounded-xl border-2 border-solid border-gray-400 px-3 py-4 text-black outline-none placeholder:text-gray-400 focus:border-primary";
+
   return (
     <div className="relative">
       <label className="flex flex-col text-sm font-medium focus-within:text-primary">
-        {label}
-        <input
-          className="mt-1 rounded-xl border-2 border-solid border-gray-400 px-3 py-4 text-black outline-none placeholder:text-gray-400 focus:border-primary"
-          type={type}
-          placeholder={placeholder}
-          {...(register && register(label.toLowerCase(), rules))}
-        />
+        {label} {!rules.required && "(optional)"}
+        {type === "textarea" ? (
+          <textarea
+            className={className + " h-24"}
+            type={type}
+            placeholder={placeholder}
+            {...(register && register(label.toLowerCase(), rules))}
+          />
+        ) : (
+          <input
+            className={className}
+            type={type}
+            placeholder={placeholder}
+            {...(register && register(label.toLowerCase(), rules))}
+          />
+        )}
       </label>
       <p className="absolute -bottom-5 text-sm font-semibold text-red-500">
         {errorMessage && `* ${errorMessage}`}
