@@ -4,6 +4,8 @@ import SideCard from "../general/SideCard";
 import { CollectionReference, DocumentData, addDoc } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
 import Button from "../general/Button";
+import Select from "../general/Select";
+import categories from "./categories";
 
 interface Props {
   onClose(): any;
@@ -26,6 +28,7 @@ const CreateItemForm: React.FC<Props> = ({
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<FormData>();
 
@@ -79,15 +82,11 @@ const CreateItemForm: React.FC<Props> = ({
           label="Image"
           errorMessage={errors.image?.message}
         />
-        <Input
-          register={register}
-          placeholder="Enter a category"
-          rules={{
-            required: "this is required",
-          }}
-          type="select"
+        <Select
+          options={categories}
+          name="category"
           label="Category"
-          errorMessage={errors.category?.message}
+          control={control}
         />
         <div className="mt-auto flex justify-center gap-6">
           <Button
