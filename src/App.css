@@ -1,6 +1,7 @@
 body {
   font-family: "Quicksand", sans-serif;
   background-color: #fafafe;
+  overflow-x: hidden;
 }
 * {
   -webkit-tap-highlight-color: transparent;
