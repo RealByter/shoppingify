@@ -61,6 +61,7 @@ const Items = () => {
           }}
           collectionRef={itemsCollection}
           doesItemExist={checkIfItemExists}
+          userId={signInCheckResult.user?.uid}
         />
       </SideDrawer>
     </>

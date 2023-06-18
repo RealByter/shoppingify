@@ -11,6 +11,7 @@ interface Props {
   onClose(): any;
   collectionRef: CollectionReference<DocumentData>;
   doesItemExist(name: string): boolean;
+  userId: string | undefined;
 }
 
 interface FormData {
@@ -24,6 +25,7 @@ const CreateItemForm: React.FC<Props> = ({
   onClose,
   collectionRef,
   doesItemExist,
+  userId,
 }) => {
   const {
     register,
@@ -36,7 +38,7 @@ const CreateItemForm: React.FC<Props> = ({
     if (doesItemExist(data.name)) {
       //TODO: show error
     } else {
-      addDoc(collectionRef, data).catch((e) => {
+      addDoc(collectionRef, { ...data, userId }).catch((e) => {
         if (e instanceof FirebaseError) {
           //TODO: show error
         }
