@@ -4,6 +4,8 @@ import ListItem from "./ListItem.interface";
 interface Value {
   showingList: boolean;
   setShowingList(state: boolean): any;
+  name: string;
+  setName(name: string): any;
   items: ListItem[];
   addItem(item: ListItem): any;
   removeItem(id: string): any;
@@ -11,6 +13,8 @@ interface Value {
 }
 
 const ShoppingListContext = createContext<Value>({
+  name: "",
+  setName: (name) => {},
   showingList: false,
   setShowingList: (state) => {},
   items: [],

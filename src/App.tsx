@@ -6,6 +6,8 @@ import "./App.css";
 import ShoppingListContext from "./components/list/ShoppingListContext";
 import ListItem from "./components/list/ListItem.interface";
 import { useState } from "react";
+import SideDrawer from "./components/general/SideDrawer";
+import ShoppingList from "./components/list/ShoppingList";
 
 const App = () => {
   const app = useFirebaseApp();
@@ -14,6 +16,7 @@ const App = () => {
 
   const [items, setItems] = useState<ListItem[]>([]);
   const [showingList, setShowingList] = useState(false);
+  const [name, setName] = useState("");
 
   const addItem = (item: ListItem) => {
     setItems((items: ListItem[]) => [...items, item]);
@@ -36,6 +39,8 @@ const App = () => {
           value={{
             items,
             addItem,
+            name,
+            setName,
             removeItem,
             changePcs,
             showingList,
@@ -43,6 +48,13 @@ const App = () => {
           }}
         >
           <RouteSwitch />
+          <SideDrawer isShowing={true}>
+            <ShoppingList
+              onClose={() => {
+                setShowingList(false);
+              }}
+            />
+          </SideDrawer>
         </ShoppingListContext.Provider>
       </FirestoreProvider>
     </AuthProvider>
