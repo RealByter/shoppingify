@@ -35,8 +35,8 @@ const Items = () => {
   };
 
   return (
-    <>
-      <div className="mx-auto max-w-3xl p-3">
+    <div className="md:grid md:grid-cols-[1fr,24rem]">
+      <div className="max-w-4xl grow p-3">
         {categories.map((category: string, index: number) => (
           <Category
             key={index}
@@ -49,12 +49,24 @@ const Items = () => {
           />
         ))}
       </div>
-      <CreateItemButton
-        onClick={() => {
-          setIsShowing(true);
-        }}
-      />
-      <SideDrawer isShowing={isShowing}>
+      <div className="md:hidden">
+        <CreateItemButton
+          onClick={() => {
+            setIsShowing(true);
+          }}
+        />
+        <SideDrawer isShowing={isShowing}>
+          <CreateItemForm
+            onClose={() => {
+              setIsShowing(false);
+            }}
+            collectionRef={itemsCollection}
+            doesItemExist={checkIfItemExists}
+            userId={signInCheckResult.user?.uid}
+          />
+        </SideDrawer>
+      </div>
+      <div className="hidden justify-self-end md:block ">
         <CreateItemForm
           onClose={() => {
             setIsShowing(false);
@@ -63,8 +75,8 @@ const Items = () => {
           doesItemExist={checkIfItemExists}
           userId={signInCheckResult.user?.uid}
         />
-      </SideDrawer>
-    </>
+      </div>
+    </div>
   );
 };
 
