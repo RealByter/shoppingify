@@ -13,6 +13,7 @@ const App = () => {
   const auth = getAuth(app);
 
   const [items, setItems] = useState<ListItem[]>([]);
+  const [showingList, setShowingList] = useState(false);
 
   const addItem = (item: ListItem) => {
     setItems((items: ListItem[]) => [...items, item]);
@@ -32,7 +33,14 @@ const App = () => {
     <AuthProvider sdk={auth}>
       <FirestoreProvider sdk={firestore}>
         <ShoppingListContext.Provider
-          value={{ items, addItem, removeItem, changePcs }}
+          value={{
+            items,
+            addItem,
+            removeItem,
+            changePcs,
+            showingList,
+            setShowingList,
+          }}
         >
           <RouteSwitch />
         </ShoppingListContext.Provider>
