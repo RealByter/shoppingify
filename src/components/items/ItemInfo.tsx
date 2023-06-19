@@ -38,31 +38,33 @@ const ItemInfo: React.FC<Props> = ({
   return (
     <SideDrawer isShowing={isShowing}>
       <SideCard className="flex flex-col bg-white px-12 py-6">
-        <button
-          onClick={onClose}
-          className="flex cursor-pointer gap-0.5 text-sm font-bold text-primary hover:underline"
-        >
-          <MdArrowRightAlt className="rotate-180 text-xl" /> back
-        </button>
-        {image && (
-          <img
-            src={image}
-            alt=""
-            className="mb-3 mt-6 aspect-[1.364/1] rounded-3xl"
-          />
-        )}
-        <SmallHeader>name</SmallHeader>
-        <p className="text-2xl font-medium">{name}</p>
-        <SmallHeader>category</SmallHeader>
-        <p className="text-lg font-medium">{category}</p>
-        {note && (
-          <>
-            <SmallHeader>note</SmallHeader>
-            <p className="max-h-[25%] overflow-y-scroll text-lg font-medium">
-              {note}
-            </p>
-          </>
-        )}
+        <div className="flex max-h-[80vh] flex-col overflow-y-auto scrollbar-hide">
+          <button
+            onClick={onClose}
+            className="flex cursor-pointer gap-0.5 text-sm font-bold text-primary hover:underline"
+          >
+            <MdArrowRightAlt className="rotate-180 text-xl" /> back
+          </button>
+          {image && (
+            <img
+              src={image}
+              alt=""
+              className="mb-3 mt-6 aspect-[1.364/1] rounded-3xl"
+            />
+          )}
+          <SmallHeader>name</SmallHeader>
+          <p className="text-2xl font-medium">{name}</p>
+          <SmallHeader>category</SmallHeader>
+          <p className="text-lg font-medium">{category}</p>
+          {note && (
+            <>
+              <SmallHeader>note</SmallHeader>
+              <p className="max-h-[25%] min-h-[4rem] overflow-y-auto text-lg font-medium">
+                {note}
+              </p>
+            </>
+          )}
+        </div>
         <div className="mt-auto flex justify-center gap-6">
           <Button
             onClick={onDelete}
