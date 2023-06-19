@@ -3,21 +3,21 @@ import SideCard from "../general/SideCard";
 import SideDrawer from "../general/SideDrawer";
 import ItemInterface from "./Item.interface";
 import Button from "../general/Button";
+import { collection, deleteDoc, doc, where } from "firebase/firestore";
+import { useFirestore } from "reactfire";
+import { FirebaseError } from "firebase/app";
 
 const SmallHeader: React.FC = ({ children }) => (
   <h4 className="mb-1 mt-6 text-xs font-medium text-gray-400">{children}</h4>
 );
 
-interface Props {
-  image?: string;
-  name: string;
-  category: string;
-  note?: string;
+interface Props extends ItemInterface {
   isShowing: boolean;
   onClose(): any;
 }
 
 const ItemInfo: React.FC<Props> = ({
+  id,
   image,
   name,
   category,
@@ -25,6 +25,16 @@ const ItemInfo: React.FC<Props> = ({
   isShowing,
   onClose,
 }) => {
+  const firestore = useFirestore();
+
+  const onDelete = () => {
+    deleteDoc(doc(firestore, "items", id)).catch((e) => {
+      if (e instanceof FirebaseError) {
+        //TODO: show error
+      }
+    });
+  };
+
   return (
     <SideDrawer isShowing={isShowing}>
       <SideCard className="flex flex-col bg-white px-12 py-6">
@@ -55,7 +65,7 @@ const ItemInfo: React.FC<Props> = ({
         )}
         <div className="mt-auto flex justify-center gap-6">
           <Button
-            onClick={() => {}}
+            onClick={onDelete}
             textColor="text-black"
             color="bg-transparent"
             rippleColor="#dddddd"
