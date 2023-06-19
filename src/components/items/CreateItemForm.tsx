@@ -93,6 +93,7 @@ const CreateItemForm: React.FC<Props> = ({
         <div className="mt-auto flex justify-center gap-6">
           <Button
             onClick={onClose}
+            type="reset"
             textColor="text-black"
             color="bg-transparent"
             rippleColor="#dddddd"
