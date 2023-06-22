@@ -8,6 +8,7 @@ import ListItem from "./components/list/ListItem.interface";
 import { useState } from "react";
 import SideDrawer from "./components/general/SideDrawer";
 import ShoppingList from "./components/list/ShoppingList";
+import Item from "./components/items/Item.interface";
 
 const App = () => {
   const app = useFirebaseApp();
@@ -18,8 +19,9 @@ const App = () => {
   const [showingList, setShowingList] = useState(false);
   const [name, setName] = useState("");
 
-  const addItem = (item: ListItem) => {
-    setItems((items: ListItem[]) => [...items, item]);
+  const addItem = (item: Item) => {
+    if (!items.find((i) => i.name === item.name))
+      setItems((items: ListItem[]) => [...items, { ...item, pcs: 1 }]);
   };
 
   const removeItem = (id: string) => {

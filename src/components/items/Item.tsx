@@ -15,7 +15,7 @@ const Item: React.FC<ItemInterface> = ({
   userId,
 }) => {
   const { shownItem, setShownItem } = useContext(ShownItemContext);
-  const {setShowingList} = useContext(ShoppingListContext)
+  const { setShowingList, addItem } = useContext(ShoppingListContext);
 
   return (
     <>
@@ -23,7 +23,7 @@ const Item: React.FC<ItemInterface> = ({
         <button
           onClick={() => {
             setShownItem(name);
-            setShowingList(false)
+            setShowingList(false);
           }}
           tabIndex={0}
           className="relative max-w-[70%] grow py-4 pl-4 text-left"
@@ -31,7 +31,13 @@ const Item: React.FC<ItemInterface> = ({
           {name}
           <Ripple color="#dddddd" duration={1000} />
         </button>
-        <button className="relative flex pt-[17.5px] grow justify-center">
+        <button
+          className="relative flex grow justify-center pt-[17.5px]"
+          onClick={() => {
+            addItem({ id, userId, name, image, category, note });
+            setShowingList(true);
+          }}
+        >
           <MdAdd className="text-xl text-gray-400" />
           <Ripple color="#dddddd" duration={500} />
         </button>

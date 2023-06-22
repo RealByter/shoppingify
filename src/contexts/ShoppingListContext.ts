@@ -1,5 +1,6 @@
 import { createContext } from "react";
 import ListItem from "../components/list/ListItem.interface";
+import Item from "../components/items/Item.interface";
 
 interface Value {
   showingList: boolean;
@@ -7,7 +8,7 @@ interface Value {
   name: string;
   setName(name: string): any;
   items: ListItem[];
-  addItem(item: ListItem): any;
+  addItem(item: Item): any;
   removeItem(id: string): any;
   changePcs(id: string, pcs: number): any;
 }

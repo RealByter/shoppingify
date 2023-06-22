@@ -17,8 +17,9 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
       <div>{/* TODO: Make the Add item cta */}</div>
       <h4>{name}</h4>
       <div>
-        {categories.map((category) => (
+        {categories.map((category, index) => (
           <ListCategory
+            key={index}
             items={items.filter((item) => item.category === category)}
           />
         ))}
