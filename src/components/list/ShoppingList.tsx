@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import ShoppingListContext from "./ShoppingListContext";
+import ShoppingListContext from "../../contexts/ShoppingListContext";
 import SideCard from "../general/SideCard";
 import categories from "../items/categories";
 import ListCategory from "./ListCategory";

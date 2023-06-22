@@ -3,7 +3,7 @@ import { getFirestore } from "firebase/firestore";
 import { AuthProvider, FirestoreProvider, useFirebaseApp } from "reactfire";
 import RouteSwitch from "./components/navigation/RouteSwitch";
 import "./App.css";
-import ShoppingListContext from "./components/list/ShoppingListContext";
+import ShoppingListContext from "./contexts/ShoppingListContext";
 import ListItem from "./components/list/ListItem.interface";
 import { useState } from "react";
 import SideDrawer from "./components/general/SideDrawer";
@@ -48,7 +48,7 @@ const App = () => {
           }}
         >
           <RouteSwitch />
-          <SideDrawer isShowing={true}>
+          <SideDrawer isShowing={showingList}>
             <ShoppingList
               onClose={() => {
                 setShowingList(false);

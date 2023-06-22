@@ -3,9 +3,9 @@ import {
   MdInsertChartOutlined,
   MdOutlineReplay,
   MdFormatListBulleted,
-  MdOutlineShoppingCart,
 } from "react-icons/md";
 import Link from "./Link";
+import ShoppingCart from "./ShoppingCart";
 
 const NavBar = () => {
   return (
@@ -20,7 +20,7 @@ const NavBar = () => {
           tooltip="statistics"
         />
       </div>
-      <MdOutlineShoppingCart className="relative bottom-6 mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary p-2.5 text-white" />
+      <ShoppingCart />
     </nav>
   );
 };

@@ -1,9 +1,9 @@
 import { createContext } from "react";
-import ListItem from "./ListItem.interface";
+import ListItem from "../components/list/ListItem.interface";
 
 interface Value {
   showingList: boolean;
-  setShowingList(state: boolean): any;
+  setShowingList: any;
   name: string;
   setName(name: string): any;
   items: ListItem[];
@@ -16,7 +16,7 @@ const ShoppingListContext = createContext<Value>({
   name: "",
   setName: (name) => {},
   showingList: false,
-  setShowingList: (state) => {},
+  setShowingList: () => {},
   items: [],
   addItem: (item) => {},
   removeItem: (id) => {},
