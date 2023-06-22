@@ -3,6 +3,8 @@ import ItemInterface from "./Item.interface";
 import ItemInfo from "./ItemInfo";
 import Ripple from "../general/Ripple";
 import ShownItemContext from "./ShownItemContext";
+import ShoppingListContext from "../../contexts/ShoppingListContext";
+import { MdAdd } from "react-icons/md";
 
 const Item: React.FC<ItemInterface> = ({
   name,
@@ -13,19 +15,25 @@ const Item: React.FC<ItemInterface> = ({
   userId,
 }) => {
   const { shownItem, setShownItem } = useContext(ShownItemContext);
+  const {setShowingList} = useContext(ShoppingListContext)
 
   return (
     <>
-      <div className="flex h-fit max-w-[182px] overflow-hidden rounded-xl bg-white pr-4 text-sm font-medium shadow-[0px_2px_12px_rgba(0,0,0,0.05)] sm:text-base">
+      <div className="flex h-fit max-w-[182px] overflow-hidden rounded-xl bg-white text-sm font-medium shadow-[0px_2px_12px_rgba(0,0,0,0.05)] sm:text-base">
         <button
           onClick={() => {
             setShownItem(name);
+            setShowingList(false)
           }}
           tabIndex={0}
-          className="relative max-w-[90%] grow py-4 pl-4 text-left"
+          className="relative max-w-[70%] grow py-4 pl-4 text-left"
         >
           {name}
           <Ripple color="#dddddd" duration={1000} />
+        </button>
+        <button className="relative flex pt-[17.5px] grow justify-center">
+          <MdAdd className="text-xl text-gray-400" />
+          <Ripple color="#dddddd" duration={500} />
         </button>
       </div>
       <ItemInfo
