@@ -9,6 +9,7 @@ import { useState } from "react";
 import SideDrawer from "./components/general/SideDrawer";
 import ShoppingList from "./components/list/ShoppingList";
 import Item from "./components/items/Item.interface";
+import { HashRouter } from "react-router-dom";
 
 const App = () => {
   const app = useFirebaseApp();
@@ -49,14 +50,16 @@ const App = () => {
             setShowingList,
           }}
         >
-          <RouteSwitch />
-          <SideDrawer isShowing={showingList}>
-            <ShoppingList
-              onClose={() => {
-                setShowingList(false);
-              }}
-            />
-          </SideDrawer>
+          <HashRouter basename={import.meta.env.DEV ? "/" : "/shoppingify/"}>
+            <SideDrawer isShowing={showingList}>
+              <ShoppingList
+                onClose={() => {
+                  setShowingList(false);
+                }}
+              />
+            </SideDrawer>
+            <RouteSwitch />
+          </HashRouter>
         </ShoppingListContext.Provider>
       </FirestoreProvider>
     </AuthProvider>
