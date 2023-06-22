@@ -1,9 +1,11 @@
+import { useContext } from "react";
+import ShoppingListContext from "../../contexts/ShoppingListContext";
 import { MdArrowRightAlt } from "react-icons/md";
 import SideCard from "../general/SideCard";
 import SideDrawer from "../general/SideDrawer";
 import ItemInterface from "./Item.interface";
 import Button from "../general/Button";
-import { collection, deleteDoc, doc, where } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import { useFirestore } from "reactfire";
 import { FirebaseError } from "firebase/app";
 
@@ -18,6 +20,7 @@ interface Props extends ItemInterface {
 
 const ItemInfo: React.FC<Props> = ({
   id,
+  userId,
   image,
   name,
   category,
@@ -26,6 +29,7 @@ const ItemInfo: React.FC<Props> = ({
   onClose,
 }) => {
   const firestore = useFirestore();
+  const { addItem } = useContext(ShoppingListContext);
 
   const onDelete = () => {
     deleteDoc(doc(firestore, "items", id)).catch((e) => {
@@ -74,7 +78,14 @@ const ItemInfo: React.FC<Props> = ({
           >
             Delete
           </Button>
-          <Button type="submit">Add to list</Button>
+          <Button
+            type="submit"
+            onClick={() => {
+              addItem({ id, image, name, category, note, userId });
+            }}
+          >
+            Add to list
+          </Button>
         </div>
       </SideCard>
     </SideDrawer>
