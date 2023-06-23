@@ -31,6 +31,7 @@ const CreateItemForm: React.FC<Props> = ({
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm<FormData>();
 
@@ -38,6 +39,7 @@ const CreateItemForm: React.FC<Props> = ({
     if (doesItemExist(data.name)) {
       //TODO: show error
     } else {
+      reset();
       addDoc(collectionRef, { ...data, userId }).catch((e) => {
         if (e instanceof FirebaseError) {
           //TODO: show error
