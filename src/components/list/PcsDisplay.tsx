@@ -18,15 +18,15 @@ const PcsDisplay: React.FC<Props> = ({ name }) => {
 
   return (
     <div
-      className={`absolute right-0 flex items-center rounded-xl transition-colors delay-200 ${
-        isEditing ? "bg-white" : "bg-transparent"
+      className={`absolute right-0 flex items-center rounded-xl transition-colors ${
+        isEditing ? "bg-white delay-100" : "bg-transparent delay-200"
       }`}
     >
       <MdDeleteOutline
         tabIndex={+isEditing - 1}
-        className={`flex h-[45px] origin-right transition-[padding,width,height] delay-200 duration-150 focus:outline-none focus-visible:outline-offset-0 focus-visible:outline-black ${
-          isEditing ? "w-9 px-2.5" : "h-0 w-0 px-0"
-        } mr-1 cursor-pointer items-center justify-center rounded-xl bg-primary text-white`}
+        className={`flex h-[45px] origin-right transition-[padding,width,height,background-color] delay-200 duration-150 focus:outline-none focus-visible:outline-offset-0 focus-visible:outline-black ${
+          isEditing ? "w-9 px-2.5 bg-primary" : "h-0 w-0 px-0 bg-transparent"
+        } mr-1 cursor-pointer items-center justify-center rounded-xl text-white`}
       />
       <MdRemove
         tabIndex={+isEditing - 1}

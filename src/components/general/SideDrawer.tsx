@@ -5,11 +5,13 @@ interface Props {
   zIndex?: number;
 }
 
+const zIndexVariants = ["z-0", "z-10", "z-20", "z-30"];
+
 const SideDrawer: React.FC<Props> = ({ isShowing, children, zIndex = 20 }) => (
   <Transition
     show={isShowing}
     as="div"
-    className={`absolute right-0 top-0 z-${zIndex}`}
+    className={`$ absolute right-0 top-0 ${zIndexVariants[zIndex / 10]}`}
     enter="transition-transform duration-300"
     enterFrom="translate-x-full"
     enterTo="translate-x-0"
