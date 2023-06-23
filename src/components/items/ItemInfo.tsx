@@ -6,7 +6,7 @@ import SideCard from "../general/SideCard";
 import SideDrawer from "../general/SideDrawer";
 import ItemInterface from "./Item.interface";
 import Button from "../general/Button";
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { useFirestore } from "reactfire";
 import { FirebaseError } from "firebase/app";
 
@@ -30,7 +30,7 @@ const ItemInfo: React.FC<Props> = ({
   onClose,
 }) => {
   const firestore = useFirestore();
-  const { addItem, setShowingList } = useContext(ShoppingListContext);
+  const { id: listId, setShowingList } = useContext(ShoppingListContext);
   const { setShownItem } = useContext(ShownItemContext);
 
   const onDelete = () => {
@@ -83,7 +83,13 @@ const ItemInfo: React.FC<Props> = ({
           <Button
             type="submit"
             onClick={() => {
-              addItem({ id, image, name, category, note, userId });
+              setDoc(doc(firestore, `shoppingLists/${listId}/listItems`, id), {
+                id,
+                name,
+                pcs: 1,
+                completed: false,
+                category
+              });
               setShownItem("");
               setShowingList(true);
             }}

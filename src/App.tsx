@@ -1,72 +1,82 @@
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { AuthProvider, FirestoreProvider, useFirebaseApp } from "reactfire";
 import RouteSwitch from "./components/navigation/RouteSwitch";
 import "./App.css";
 import ShoppingListContext from "./contexts/ShoppingListContext";
 import ListItem from "./components/list/ListItem.interface";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SideDrawer from "./components/general/SideDrawer";
 import ShoppingList from "./components/list/ShoppingList";
 import Item from "./components/items/Item.interface";
 import { HashRouter } from "react-router-dom";
 import ShownItemContext from "./contexts/ShownItemContext";
+import { collection, doc, query, setDoc, where } from "firebase/firestore";
+import { useFirestore, useFirestoreCollectionData } from "reactfire";
 
 const App = () => {
-  const app = useFirebaseApp();
-  const firestore = getFirestore(app);
-  const auth = getAuth(app);
-
-  const [items, setItems] = useState<ListItem[]>([]);
+  const firestore = useFirestore();
+  const shoppingListQuery = query(
+    collection(firestore, "shoppingLists"),
+    where("status", "==", "ongoing")
+  );
+  const { status: shoppingListStatus, data: shoppingLists } =
+    useFirestoreCollectionData(shoppingListQuery, { idField: "id" });
+  const listItemsRef =
+    shoppingListStatus === "success" && shoppingLists.length > 0
+      ? collection(firestore, `shoppingLists/${shoppingLists[0].id}/listItems`)
+      : collection(firestore, "empty");
+  const { status: itemsStatus, data: listItems } = useFirestoreCollectionData(
+    listItemsRef,
+    {
+      idField: "id",
+    }
+  );
   const [showingList, setShowingList] = useState(false);
-  const [name, setName] = useState("");
   const [shownItem, setShownItem] = useState("");
 
-  const addItem = (item: Item) => {
-    if (!items.find((i) => i.name === item.name))
-      setItems((items: ListItem[]) => [...items, { ...item, pcs: 1 }]);
-  };
-
-  const removeItem = (id: string) => {
-    setItems((items: ListItem[]) => items.filter((item) => item.id !== id));
-  };
-
-  const changePcs = (id: string, pcs: number) => {
-    setItems((items: ListItem[]) =>
-      items.map((item) => (item.id === id ? { ...item, pcs } : item))
-    );
-  };
+  useEffect(() => {
+    if (shoppingListStatus === "success") {
+      if (shoppingLists.length === 0) {
+        setDoc(doc(firestore, "shoppingLists"), {
+          name: "",
+          status: "ongoing",
+        });
+      }
+    }
+  }, [shoppingListStatus, shoppingLists]);
 
   return (
-    <AuthProvider sdk={auth}>
-      <FirestoreProvider sdk={firestore}>
-        <ShoppingListContext.Provider
-          value={{
-            items,
-            addItem,
-            name,
-            setName,
-            removeItem,
-            changePcs,
-            showingList,
-            setShowingList,
-          }}
-        >
-          <ShownItemContext.Provider value={{ shownItem, setShownItem }}>
-            <HashRouter basename={import.meta.env.DEV ? "/" : "/shoppingify/"}>
-              <SideDrawer isShowing={showingList} zIndex={30}>
-                <ShoppingList
-                  onClose={() => {
-                    setShowingList(false);
-                  }}
-                />
-              </SideDrawer>
-              <RouteSwitch />
-            </HashRouter>
-          </ShownItemContext.Provider>
-        </ShoppingListContext.Provider>
-      </FirestoreProvider>
-    </AuthProvider>
+    <ShoppingListContext.Provider
+      value={{
+        name:
+          shoppingListStatus === "success" && shoppingLists.length > 0
+            ? shoppingLists[0].name
+            : "",
+        id:
+          shoppingListStatus === "success" && shoppingLists.length > 0
+            ? shoppingLists[0].id
+            : "",
+        items:
+          itemsStatus === "success"
+            ? listItems
+              ? (listItems as ListItem[])
+              : []
+            : [],
+        showingList,
+        setShowingList,
+      }}
+    >
+      <ShownItemContext.Provider value={{ shownItem, setShownItem }}>
+        <HashRouter basename={import.meta.env.DEV ? "/" : "/shoppingify/"}>
+          <SideDrawer isShowing={showingList} zIndex={30}>
+            <ShoppingList
+              onClose={() => {
+                setShowingList(false);
+              }}
+            />
+          </SideDrawer>
+          <RouteSwitch />
+        </HashRouter>
+      </ShownItemContext.Provider>
+    </ShoppingListContext.Provider>
   );
 };
 

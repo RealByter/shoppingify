@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { FirebaseAppProvider } from "reactfire";
+import FirebaseWrapper from "./components/FirebaseWrapper";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAltaAAbp3yed-PjevL5ASwWihJYeNCGU0",
@@ -17,7 +18,9 @@ const firebaseConfig = {
 ReactDOM.render(
   <React.StrictMode>
     <FirebaseAppProvider firebaseConfig={firebaseConfig}>
-      <App />
+      <FirebaseWrapper>
+        <App />
+      </FirebaseWrapper>
     </FirebaseAppProvider>
   </React.StrictMode>,
   document.getElementById("root")

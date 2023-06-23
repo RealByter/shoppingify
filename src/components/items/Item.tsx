@@ -5,6 +5,8 @@ import Ripple from "../general/Ripple";
 import ShownItemContext from "../../contexts/ShownItemContext";
 import ShoppingListContext from "../../contexts/ShoppingListContext";
 import { MdAdd } from "react-icons/md";
+import { doc, setDoc } from "firebase/firestore";
+import { useFirestore } from "reactfire";
 
 const Item: React.FC<ItemInterface> = ({
   name,
@@ -15,7 +17,8 @@ const Item: React.FC<ItemInterface> = ({
   userId,
 }) => {
   const { shownItem, setShownItem } = useContext(ShownItemContext);
-  const { setShowingList, addItem } = useContext(ShoppingListContext);
+  const { setShowingList, id: listId } = useContext(ShoppingListContext);
+  const firestore = useFirestore();
 
   return (
     <>
@@ -34,7 +37,13 @@ const Item: React.FC<ItemInterface> = ({
         <button
           className="relative flex grow justify-center pt-[17.5px]"
           onClick={() => {
-            addItem({ id, userId, name, image, category, note });
+            setDoc(doc(firestore, `shoppingLists/${listId}/listItems`, id), {
+              id,
+              name,
+              pcs: 1,
+              completed: false,
+              category
+            });
             setShowingList(true);
           }}
         >
