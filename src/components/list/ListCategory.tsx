@@ -12,7 +12,7 @@ const ListCategory: React.FC<Props> = ({ category, items }) =>
       <h4 className="text-sm text-[#828282]">{category}</h4>
       <div className="mt-6 flex flex-col gap-3">
         {items.map((item) => (
-          <ListItem key={item.id} name={item.name} />
+          <ListItem key={item.id} name={item.name} id={item.id} />
         ))}
       </div>
     </div>
