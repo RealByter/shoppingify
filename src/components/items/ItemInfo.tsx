@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import ShoppingListContext from "../../contexts/ShoppingListContext";
+import ShownItemContext from "../../contexts/ShownItemContext";
 import { MdArrowRightAlt } from "react-icons/md";
 import SideCard from "../general/SideCard";
 import SideDrawer from "../general/SideDrawer";
@@ -29,7 +30,8 @@ const ItemInfo: React.FC<Props> = ({
   onClose,
 }) => {
   const firestore = useFirestore();
-  const { addItem } = useContext(ShoppingListContext);
+  const { addItem, setShowingList } = useContext(ShoppingListContext);
+  const { setShownItem } = useContext(ShownItemContext);
 
   const onDelete = () => {
     deleteDoc(doc(firestore, "items", id)).catch((e) => {
@@ -82,6 +84,8 @@ const ItemInfo: React.FC<Props> = ({
             type="submit"
             onClick={() => {
               addItem({ id, image, name, category, note, userId });
+              setShownItem("");
+              setShowingList(true);
             }}
           >
             Add to list
