@@ -6,7 +6,7 @@ interface Props {
 }
 
 const ListItem: React.FC<Props> = ({ name }) => (
-  <div className="flex justify-between">
+  <div className="flex justify-between items-center h-[45px] relative">
     <p className="text-base font-semibold md:text-lg whitespace-nowrap">{name}</p>
     <PcsDisplay name={name} />
   </div>

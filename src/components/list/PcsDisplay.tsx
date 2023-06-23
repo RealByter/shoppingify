@@ -17,18 +17,21 @@ const PcsDisplay: React.FC<Props> = ({ name }) => {
   }, []);
 
   return (
-    <div className="flex items-center rounded-xl bg-white h-[45px]">
-      <MdDeleteOutline tabIndex={0} className="text-white flex items-center justify-center bg-primary rounded-xl h-full w-9 px-2.5 cursor-pointer" />
-      <MdRemove tabIndex={0} className="text-primary mx-1 text-xl"/>
+    <div className={`flex items-center rounded-xl absolute right-0 transition-colors delay-200 ${isEditing ? 'bg-white' : 'bg-transparent'}`}>
+      <MdDeleteOutline
+        tabIndex={0}
+        className={`flex h-[45px] origin-right transition-all duration-150 delay-200 ${isEditing ? 'w-9 px-2.5' : "w-0 px-0 h-0"} mr-1 cursor-pointer items-center justify-center rounded-xl bg-primary text-white`}
+      />
+      <MdRemove tabIndex={0} className={`text-xl" mx-1 text-primary transition-all duration-150 delay-100 ${isEditing ? 'mx-1' : "mx-0 w-0"}`} />
       <button
         onClick={() => {
           setIsEditing((oldState) => !oldState);
         }}
-        className="w-[68px] h-8 rounded-3xl border-2 border-solid border-primary text-xs font-bold text-primary"
+        className={`h-8 w-[68px] rounded-3xl border-2 border-solid border-primary text-xs font-bold text-primary`}
       >
         {item?.pcs} pcs
       </button>
-      <MdAdd tabIndex={0} className="text-primary mx-1 text-xl"/>
+      <MdAdd tabIndex={0} className={`text-xl text-primary transition-all duration-150 ${isEditing ? 'mx-1' : "mx-0 w-0"}`} />
     </div>
   );
 };
