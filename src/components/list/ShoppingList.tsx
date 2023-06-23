@@ -21,6 +21,7 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
         {categories.map((category, index) => (
           <ListCategory
             key={index}
+            category={category}
             items={items.filter((item) => item.category === category)}
           />
         ))}

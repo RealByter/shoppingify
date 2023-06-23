@@ -2,7 +2,7 @@ import { useContext } from "react";
 import ItemInterface from "./Item.interface";
 import ItemInfo from "./ItemInfo";
 import Ripple from "../general/Ripple";
-import ShownItemContext from "./ShownItemContext";
+import ShownItemContext from "../../contexts/ShownItemContext";
 import ShoppingListContext from "../../contexts/ShoppingListContext";
 import { MdAdd } from "react-icons/md";
 

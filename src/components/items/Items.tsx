@@ -12,7 +12,6 @@ import SideDrawer from "../general/SideDrawer";
 import CreateItemButton from "./CreateItemButton";
 import categories from "./categories";
 import CreateItemForm from "./CreateItemForm";
-import ShownItemContext from "./ShownItemContext";
 
 const Items = () => {
   const { data: signInCheckResult } = useSigninCheck();
@@ -26,7 +25,7 @@ const Items = () => {
     idField: "id",
   });
   const [isShowing, setIsShowing] = useState(false);
-  const [shownItem, setShownItem] = useState("");
+  
 
   if (status === "loading") {
     return <LoadingSpinner loading />;
@@ -39,7 +38,7 @@ const Items = () => {
   return (
     <div className="md:grid md:grid-cols-[1fr,24rem]">
       <div className="max-w-4xl grow p-3">
-        <ShownItemContext.Provider value={{ shownItem, setShownItem }}>
+        <>
           {categories.map((category: string, index: number) => (
             <Category
               key={index}
@@ -51,7 +50,7 @@ const Items = () => {
               }
             />
           ))}
-        </ShownItemContext.Provider>
+        </>
       </div>
       <div className="md:hidden">
         <CreateItemButton

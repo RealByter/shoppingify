@@ -10,6 +10,7 @@ import SideDrawer from "./components/general/SideDrawer";
 import ShoppingList from "./components/list/ShoppingList";
 import Item from "./components/items/Item.interface";
 import { HashRouter } from "react-router-dom";
+import ShownItemContext from "./contexts/ShownItemContext";
 
 const App = () => {
   const app = useFirebaseApp();
@@ -19,6 +20,7 @@ const App = () => {
   const [items, setItems] = useState<ListItem[]>([]);
   const [showingList, setShowingList] = useState(false);
   const [name, setName] = useState("");
+  const [shownItem, setShownItem] = useState("");
 
   const addItem = (item: Item) => {
     if (!items.find((i) => i.name === item.name))
@@ -50,16 +52,18 @@ const App = () => {
             setShowingList,
           }}
         >
-          <HashRouter basename={import.meta.env.DEV ? "/" : "/shoppingify/"}>
-            <SideDrawer isShowing={showingList}>
-              <ShoppingList
-                onClose={() => {
-                  setShowingList(false);
-                }}
-              />
-            </SideDrawer>
-            <RouteSwitch />
-          </HashRouter>
+          <ShownItemContext.Provider value={{ shownItem, setShownItem }}>
+            <HashRouter basename={import.meta.env.DEV ? "/" : "/shoppingify/"}>
+              <SideDrawer isShowing={showingList} zIndex={30}>
+                <ShoppingList
+                  onClose={() => {
+                    setShowingList(false);
+                  }}
+                />
+              </SideDrawer>
+              <RouteSwitch />
+            </HashRouter>
+          </ShownItemContext.Provider>
         </ShoppingListContext.Provider>
       </FirestoreProvider>
     </AuthProvider>

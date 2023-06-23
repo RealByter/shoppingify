@@ -2,9 +2,11 @@ import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import ShoppingListContext from "../../contexts/ShoppingListContext";
 import Bottle from "../../bottle.svg";
+import ShownItemContext from "../../contexts/ShownItemContext";
 
 const AddItemCta = () => {
   const { setShowingList } = useContext(ShoppingListContext);
+  const { setShownItem } = useContext(ShownItemContext);
   let history = useHistory();
 
   return (
@@ -21,6 +23,7 @@ const AddItemCta = () => {
         <button
           onClick={() => {
             history.push("/items");
+            setShownItem("");
             setShowingList(false);
           }}
           className="rounded-xl bg-white px-8 py-3 text-xs font-bold text-[#34333A]"
