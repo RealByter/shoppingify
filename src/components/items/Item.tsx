@@ -26,7 +26,7 @@ const Item: React.FC<ItemInterface> = ({
             setShowingList(false);
           }}
           tabIndex={0}
-          className="relative max-w-[70%] grow py-4 pl-4 text-left"
+          className="relative w-[70%] py-4 pl-4 text-left"
         >
           {name}
           <Ripple color="#dddddd" duration={1000} />
