@@ -17,12 +17,23 @@ const PcsDisplay: React.FC<Props> = ({ name }) => {
   }, []);
 
   return (
-    <div className={`flex items-center rounded-xl absolute right-0 transition-colors delay-200 ${isEditing ? 'bg-white' : 'bg-transparent'}`}>
+    <div
+      className={`absolute right-0 flex items-center rounded-xl transition-colors delay-200 ${
+        isEditing ? "bg-white" : "bg-transparent"
+      }`}
+    >
       <MdDeleteOutline
-        tabIndex={0}
-        className={`flex h-[45px] origin-right transition-all duration-150 delay-200 ${isEditing ? 'w-9 px-2.5' : "w-0 px-0 h-0"} mr-1 cursor-pointer items-center justify-center rounded-xl bg-primary text-white`}
+        tabIndex={+isEditing - 1}
+        className={`flex h-[45px] origin-right transition-[padding,width,height] delay-200 duration-150 focus:outline-none focus-visible:outline-offset-0 focus-visible:outline-black ${
+          isEditing ? "w-9 px-2.5" : "h-0 w-0 px-0"
+        } mr-1 cursor-pointer items-center justify-center rounded-xl bg-primary text-white`}
       />
-      <MdRemove tabIndex={0} className={`text-xl" mx-1 text-primary transition-all duration-150 delay-100 ${isEditing ? 'mx-1' : "mx-0 w-0"}`} />
+      <MdRemove
+        tabIndex={+isEditing - 1}
+        className={`mx-1 cursor-pointer text-xl text-primary outline-none transition-[margin,width] delay-100 duration-150 focus:outline-none focus-visible:outline-offset-0 focus-visible:outline-black ${
+          isEditing ? "mx-1" : "mx-0 w-0"
+        }`}
+      />
       <button
         onClick={() => {
           setIsEditing((oldState) => !oldState);
@@ -31,7 +42,12 @@ const PcsDisplay: React.FC<Props> = ({ name }) => {
       >
         {item?.pcs} pcs
       </button>
-      <MdAdd tabIndex={0} className={`text-xl text-primary transition-all duration-150 ${isEditing ? 'mx-1' : "mx-0 w-0"}`} />
+      <MdAdd
+        tabIndex={+isEditing - 1}
+        className={`cursor-pointer text-xl text-primary outline-none transition-[margin,width] duration-150 focus:outline-none focus-visible:outline-offset-0 focus-visible:outline-black ${
+          isEditing ? "mx-1" : "mx-0 w-0"
+        }`}
+      />
     </div>
   );
 };
