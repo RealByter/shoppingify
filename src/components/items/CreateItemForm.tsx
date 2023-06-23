@@ -48,7 +48,7 @@ const CreateItemForm: React.FC<Props> = ({
   };
 
   return (
-    <SideCard className="flex flex-col bg-[#fafafe] p-8">
+    <SideCard className="flex flex-col bg-[#fafafe] py-8">
       <h3 className="text-2xl font-medium">Add a new item</h3>
       <form
         onSubmit={handleSubmit(onSubmitHandler)}

@@ -41,7 +41,7 @@ const ItemInfo: React.FC<Props> = ({
 
   return (
     <SideDrawer isShowing={isShowing}>
-      <SideCard className="flex flex-col bg-white px-12 py-6">
+      <SideCard className="flex flex-col bg-white py-6">
         <div className="flex max-h-[80vh] flex-col overflow-y-auto scrollbar-hide">
           <button
             onClick={onClose}
