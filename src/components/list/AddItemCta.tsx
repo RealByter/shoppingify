@@ -26,7 +26,7 @@ const AddItemCta = () => {
             setShownItem("");
             setShowingList(false);
           }}
-          className="rounded-xl bg-white px-8 py-3 text-xs font-bold text-[#34333A]"
+          className="rounded-xl bg-white px-8 py-3 text-sm font-bold text-[#34333A]"
         >
           Add item
         </button>

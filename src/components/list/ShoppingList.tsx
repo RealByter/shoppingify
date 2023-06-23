@@ -14,9 +14,9 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
   const { items, name } = useContext(ShoppingListContext);
 
   return (
-    <SideCard className="bg-[#e6d8c8] px-[2.4vw] py-6">
+    <SideCard className="bg-[#e6d8c8] py-6">
       <AddItemCta />
-      <h4>{name}</h4>
+      <h4 className="text-gray-700 font-bold text-2xl mt-8 mb-9">{name ? name : "Shopping list"}</h4>
       <div>
         {categories.map((category, index) => (
           <ListCategory
