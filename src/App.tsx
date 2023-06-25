@@ -55,10 +55,8 @@ const App = () => {
             ? shoppingLists[0].id
             : "",
         items:
-          itemsStatus === "success"
-            ? listItems
-              ? (listItems as ListItem[])
-              : []
+          itemsStatus === "success" && listItems
+            ? (listItems as ListItem[])
             : [],
         showingList,
         setShowingList,
