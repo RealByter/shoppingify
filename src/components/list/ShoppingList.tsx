@@ -22,7 +22,7 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
           <h4 className="mb-9 mt-8 text-2xl font-bold text-gray-700">
             {name ? name : "Shopping list"}
           </h4>
-          <div>
+          <div className="overflow-y-auto scrollbar-hide">
             {categories.map((category, index) => (
               <ListCategory
                 key={index}
@@ -34,15 +34,15 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
         </>
       ) : (
         <div className="relative flex grow flex-col items-center justify-center">
-          <p className="text-xl font-bold relative -top-32">No items</p>
+          <p className="relative -top-32 text-xl font-bold">No items</p>
           <img
-            className="absolute z-10 bottom-16"
+            className="absolute bottom-16 z-10"
             src={shoppingCartIcon}
             alt="shopping cart"
           />
         </div>
       )}
-      <div className="absolute bottom-0 left-0 flex h-24 w-full items-center justify-center bg-white">
+      <div className="-mb-6 mt-auto flex -ml-[4.32vw] w-[calc(100%+8.64vw)] shrink-0 basis-24 items-center justify-center bg-white md:-ml-[3vw] md:w-[calc(100%+6vw)] xl:-ml-11 xl:w-[calc(100%+88px)]">
         <div
           className={`flex h-[61px] w-11/12 items-center justify-between rounded-xl border-2 border-solid ${
             items.length === 0 ? "border-gray-400" : "border-primary"
