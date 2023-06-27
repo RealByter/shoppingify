@@ -27,11 +27,13 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
 
   useEffect(() => {
     if (name) setNameInput(name);
+    else setNameInput("");
   }, [name]);
 
   const getCurrentDate = (): string => {
     const curDate = new Date();
-    let dateString = curDate.toLocaleDateString("en-us", { weekday: "short" }) + ' ';
+    let dateString =
+      curDate.toLocaleDateString("en-us", { weekday: "short" }) + " ";
     dateString += curDate.getDay() + ".";
     dateString += curDate.getMonth() + ".";
     dateString += curDate.getFullYear();
@@ -129,6 +131,7 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
                   updateDoc(docRef, {
                     status: "completed",
                     name: name ? name : "Shopping list",
+                    at: getCurrentDate(),
                   });
                   setEditMode(true);
                 }}
