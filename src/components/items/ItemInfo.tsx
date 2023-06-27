@@ -16,17 +16,18 @@ const SmallHeader: React.FC = ({ children }) => (
 
 interface Props extends ItemInterface {
   isShowing: boolean;
+  display: boolean;
   onClose(): any;
 }
 
 const ItemInfo: React.FC<Props> = ({
   id,
-  userId,
   image,
   name,
   category,
   note,
   isShowing,
+  display,
   onClose,
 }) => {
   const firestore = useFirestore();
@@ -72,14 +73,16 @@ const ItemInfo: React.FC<Props> = ({
           )}
         </div>
         <div className="mt-auto flex justify-center gap-6">
-          <Button
-            onClick={onDelete}
-            textColor="text-black"
-            color="bg-transparent"
-            rippleColor="#dddddd"
-          >
-            Delete
-          </Button>
+          {!display && (
+            <Button
+              onClick={onDelete}
+              textColor="text-black"
+              color="bg-transparent"
+              rippleColor="#dddddd"
+            >
+              Delete
+            </Button>
+          )}
           <Button
             type="submit"
             onClick={() => {
@@ -88,7 +91,7 @@ const ItemInfo: React.FC<Props> = ({
                 name,
                 pcs: 1,
                 completed: false,
-                category
+                category,
               });
               setShownItem("");
               setShowingList(true);
