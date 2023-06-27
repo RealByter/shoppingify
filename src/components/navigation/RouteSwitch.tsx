@@ -4,6 +4,7 @@ import { useSigninCheck } from "reactfire";
 import NavBar from "./NavBar";
 import Items from "../items/Items";
 import History from "../history/History";
+import ListHistory from "../history/ListHistory";
 
 const RouteSwitch = () => {
   const { status, data: signInCheckResult } = useSigninCheck();
@@ -24,6 +25,7 @@ const RouteSwitch = () => {
             <>
               <Route path="/" element={<Items />} />
               <Route path="/history" element={<History />} />
+              <Route path="/history/:listId" element={<ListHistory />} />
             </>
           )}
           <Route
