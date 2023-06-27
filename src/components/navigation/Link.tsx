@@ -20,7 +20,7 @@ const Link: React.FC<Props> = ({ to, tooltip, Icon }) => (
   >
     <Icon className="text-2xl" />
     <Ripple color="#dddddd" duration={1000} />
-    <span className="pointer-events-none absolute -right-12 top-1/2 z-40 flex h-5 w-16 -translate-y-1/2 items-center justify-center rounded-md bg-gray-700 text-xs text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+    <span className="pointer-events-none absolute -right-12 top-1/2 z-40 flex h-5 w-16 -translate-y-1/2 items-center justify-center rounded-md bg-gray-700 text-xs text-white opacity-0 transition-opacity duration-300 lg:group-hover:opacity-100 group-focus-visible:opacity-100">
       {tooltip}
     </span>
   </NavLink>
