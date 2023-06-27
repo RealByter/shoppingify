@@ -5,7 +5,7 @@ import ListItem from "./components/list/ListItem.interface";
 import { useEffect, useState } from "react";
 import SideDrawer from "./components/general/SideDrawer";
 import ShoppingList from "./components/list/ShoppingList";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import ShownItemContext from "./contexts/ShownItemContext";
 import { addDoc, collection, query, where } from "firebase/firestore";
 import { useFirestore, useFirestoreCollectionData } from "reactfire";
@@ -62,7 +62,7 @@ const App = () => {
       }}
     >
       <ShownItemContext.Provider value={{ shownItem, setShownItem }}>
-        <HashRouter basename={import.meta.env.DEV ? "/" : "/shoppingify/"}>
+        <BrowserRouter basename={import.meta.env.DEV ? "/" : "/shoppingify/"}>
           <SideDrawer isShowing={showingList} zIndex={30}>
             <ShoppingList
               onClose={() => {
@@ -71,7 +71,7 @@ const App = () => {
             />
           </SideDrawer>
           <RouteSwitch />
-        </HashRouter>
+        </BrowserRouter>
       </ShownItemContext.Provider>
     </ShoppingListContext.Provider>
   );

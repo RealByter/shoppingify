@@ -29,6 +29,15 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
     if (name) setNameInput(name);
   }, [name]);
 
+  const getCurrentDate = (): string => {
+    const curDate = new Date();
+    let dateString = curDate.toLocaleDateString("en-us", { weekday: "short" }) + ' ';
+    dateString += curDate.getDay() + ".";
+    dateString += curDate.getMonth() + ".";
+    dateString += curDate.getFullYear();
+    return dateString;
+  };
+
   return (
     <>
       <SideCard className="relative flex flex-col bg-[#e6d8c8] py-6">
@@ -121,7 +130,7 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
                     status: "completed",
                     name: name ? name : "Shopping list",
                   });
-                  setEditMode(true)
+                  setEditMode(true);
                 }}
               >
                 Complete
@@ -157,6 +166,7 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
             onClick={() => {
               updateDoc(docRef, {
                 status: "cancelled",
+                at: getCurrentDate(),
               });
               setEditMode(true);
               setModalOpen(false);

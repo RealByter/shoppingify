@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ShoppingListContext from "../../contexts/ShoppingListContext";
 import Bottle from "../../bottle.svg";
 import ShownItemContext from "../../contexts/ShownItemContext";
@@ -7,7 +7,7 @@ import ShownItemContext from "../../contexts/ShownItemContext";
 const AddItemCta = () => {
   const { setShowingList } = useContext(ShoppingListContext);
   const { setShownItem } = useContext(ShownItemContext);
-  let history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <div className="flex items-center justify-between gap-8 rounded-3xl bg-[#80485B] px-6">
@@ -22,7 +22,7 @@ const AddItemCta = () => {
         </p>
         <button
           onClick={() => {
-            history.push("/items");
+            navigate("/items");
             setShownItem("");
             setShowingList(false);
           }}
