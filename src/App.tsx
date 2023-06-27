@@ -5,10 +5,9 @@ import ListItem from "./components/list/ListItem.interface";
 import { useEffect, useState } from "react";
 import SideDrawer from "./components/general/SideDrawer";
 import ShoppingList from "./components/list/ShoppingList";
-import Item from "./components/items/Item.interface";
 import { HashRouter } from "react-router-dom";
 import ShownItemContext from "./contexts/ShownItemContext";
-import { collection, doc, query, setDoc, where } from "firebase/firestore";
+import { addDoc, collection, query, where } from "firebase/firestore";
 import { useFirestore, useFirestoreCollectionData } from "reactfire";
 
 const App = () => {
@@ -35,7 +34,7 @@ const App = () => {
   useEffect(() => {
     if (shoppingListStatus === "success") {
       if (shoppingLists.length === 0) {
-        setDoc(doc(firestore, "shoppingLists"), {
+        addDoc(collection(firestore, "shoppingLists"), {
           name: "",
           status: "ongoing",
         });
@@ -53,7 +52,7 @@ const App = () => {
         id:
           shoppingListStatus === "success" && shoppingLists.length > 0
             ? shoppingLists[0].id
-            : "",
+            : "empty",
         items:
           itemsStatus === "success" && listItems
             ? (listItems as ListItem[])
