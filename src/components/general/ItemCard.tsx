@@ -23,14 +23,14 @@ const ItemCard: React.FC<Props> = ({
 
   return (
     <>
-      <div className="flex h-fit max-w-[182px] overflow-hidden rounded-xl bg-white text-sm font-medium shadow-[0px_2px_12px_rgba(0,0,0,0.05)] sm:text-base">
+      <div className={`${display && "relative"} flex h-fit max-w-[182px] overflow-hidden rounded-xl bg-white text-sm font-medium shadow-[0px_2px_12px_rgba(0,0,0,0.05)] sm:text-base`}>
         <button
           onClick={() => {
             setShownItem(name);
             setShowingList(false);
           }}
           tabIndex={0}
-          className="relative w-[70%] py-4 pl-4 text-left"
+          className={`${!display && "relative"} w-[70%] py-4 pl-4 text-left`}
         >
           {name}
           <Ripple color="#dddddd" duration={1000} />
