@@ -5,7 +5,7 @@ import categories from "../items/categories";
 import ListCategory from "./ListCategory";
 import shoppingCartIcon from "../../shoppingCart.svg";
 import AddItemCta from "./AddItemCta";
-import { useFirestore, useFirestoreDocData } from "reactfire";
+import { useFirebaseApp, useFirestore, useFirestoreDocData } from "reactfire";
 import { doc, updateDoc } from "firebase/firestore";
 import { MdCreate } from "react-icons/md";
 import Button from "../general/Button";
@@ -29,16 +29,6 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
     if (name) setNameInput(name);
     else setNameInput("");
   }, [name]);
-
-  const getCurrentDate = (): string => {
-    const curDate = new Date();
-    let dateString =
-      curDate.toLocaleDateString("en-us", { weekday: "short" }) + " ";
-    dateString += curDate.getDay() + ".";
-    dateString += curDate.getMonth() + ".";
-    dateString += curDate.getFullYear();
-    return dateString;
-  };
 
   return (
     <>
@@ -131,7 +121,7 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
                   updateDoc(docRef, {
                     status: "completed",
                     name: name ? name : "Shopping list",
-                    at: getCurrentDate(),
+                    at: new Date().getTime(),
                   });
                   setEditMode(true);
                 }}
@@ -169,7 +159,7 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
             onClick={() => {
               updateDoc(docRef, {
                 status: "cancelled",
-                at: getCurrentDate(),
+                at: new Date().getTime(),
               });
               setEditMode(true);
               setModalOpen(false);
