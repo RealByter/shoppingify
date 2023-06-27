@@ -18,7 +18,7 @@ const toDateString = (at: number): string => {
 };
 
 const HistoryRecord: React.FC<Props> = ({ name, at, completed, id }) => (
-  <div className="flex cursor-pointer flex-wrap gap-y-2 items-center border-t-2 border-gray-100 bg-white p-2 sm:gap-6 sm:rounded-xl sm:border-none sm:p-5 sm:shadow-[0px_2px_12px_0px_rgba(0,0,0,0.05)] sm:mb-7 [&:not:first-child]:border-solid">
+  <div className="flex cursor-pointer flex-wrap gap-y-3 items-center border-t-2 border-gray-100 bg-white px-3 py-3 sm:gap-6 sm:rounded-xl sm:border-none sm:p-5 sm:shadow-[0px_2px_12px_0px_rgba(0,0,0,0.05)] sm:mb-7">
     <h3 className="ml-0.5 order-1 mr-auto w-[90%] font-semibold sm:order-none sm:w-auto sm:ml-0">
       {name}
     </h3>
