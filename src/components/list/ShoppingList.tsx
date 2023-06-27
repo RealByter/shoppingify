@@ -53,6 +53,7 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
               {categories.map((category, index) => (
                 <ListCategory
                   key={index}
+                  editMode={editMode}
                   category={category}
                   items={items.filter((item) => item.category === category)}
                 />
@@ -94,7 +95,7 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
                 disabled={items.length === 0}
               />
               <button
-                className="h-full w-[87px] rounded-lg bg-primary text-base font-bold text-white disabled:bg-gray-400"
+                className="-mr-[1px] h-full w-[88px] rounded-lg bg-primary text-base font-bold text-white disabled:bg-gray-400"
                 disabled={items.length === 0}
                 type="submit"
               >
@@ -120,6 +121,7 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
                     status: "completed",
                     name: name ? name : "Shopping list",
                   });
+                  setEditMode(true)
                 }}
               >
                 Complete
@@ -156,6 +158,8 @@ const ShoppingList: React.FC<Props> = ({ onClose }) => {
               updateDoc(docRef, {
                 status: "cancelled",
               });
+              setEditMode(true);
+              setModalOpen(false);
             }}
           >
             &nbsp; Yes &nbsp;
