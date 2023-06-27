@@ -34,7 +34,7 @@ const ListItem: React.FC<Props> = ({ name, id, editMode }) => {
         )}
         <p className="text-base font-semibold md:text-lg">{name}</p>
       </div>
-      <PcsDisplay id={id} />
+      <PcsDisplay id={id} editMode={editMode} />
     </div>
   );
 };
