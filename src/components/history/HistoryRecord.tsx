@@ -1,5 +1,6 @@
 import { MdEventNote, MdExpandMore } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import DateDisplay from "./DateDisplay";
 
 interface Props {
   name: string;
@@ -7,16 +8,6 @@ interface Props {
   completed: boolean;
   id: string;
 }
-
-const toDateString = (at: number): string => {
-  const curDate = new Date(at);
-  let dateString =
-    curDate.toLocaleDateString("en-us", { weekday: "short" }) + " ";
-  dateString += curDate.getDay() + ".";
-  dateString += curDate.getMonth() + ".";
-  dateString += curDate.getFullYear();
-  return dateString;
-};
 
 const HistoryRecord: React.FC<Props> = ({ name, at, completed, id }) => (
   <NavLink
@@ -26,10 +17,7 @@ const HistoryRecord: React.FC<Props> = ({ name, at, completed, id }) => (
     <h3 className="order-1 ml-0.5 mr-auto w-[90%] font-semibold sm:order-none sm:ml-0 sm:w-auto">
       {name}
     </h3>
-    <div className="order-3 mr-auto flex items-center text-gray-400 sm:order-none sm:mr-0 sm:gap-2">
-      <MdEventNote className="text-xl" />
-      <p className="text-xs">{toDateString(at)}</p>
-    </div>
+    <DateDisplay at={at} />
     <div className="order-4 flex justify-center sm:order-none sm:w-[76px]">
       <p
         className={`rounded-lg border border-solid px-1 py-0.5 text-xs sm:px-2 sm:py-1 ${
