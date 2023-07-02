@@ -1,12 +1,22 @@
 import { collection, orderBy, query, where } from "firebase/firestore";
-import { useFirestore, useFirestoreCollectionData } from "reactfire";
+import {
+  useFirestore,
+  useFirestoreCollectionData,
+  useSigninCheck,
+} from "reactfire";
 import LoadingSpinner from "../general/LoadingSpinner";
 import HistoryRecord from "./HistoryRecord";
 
 const History = () => {
+  const { data: signInCheckResult } = useSigninCheck();
   const firestore = useFirestore();
   const listsQuery = query(
     collection(firestore, "shoppingLists"),
+    where(
+      "userId",
+      "==",
+      signInCheckResult.signedIn ? signInCheckResult.user.uid : "empty"
+    ),
     orderBy("at", "desc")
   );
   const { status, data: lists } = useFirestoreCollectionData(listsQuery, {
@@ -16,8 +26,8 @@ const History = () => {
   if (status === "loading") return <LoadingSpinner loading={true} />;
 
   return (
-    <div className="mx-auto max-w-4xl pt-4 bg-white sm:w-[80vw] sm:bg-transparent">
-      <h2 className="ml-3 mb-4 text-xl font-bold sm:m-0 sm:my-10 sm:text-2xl">
+    <div className="mx-auto max-w-4xl bg-white pt-4 sm:w-[80vw] sm:bg-transparent">
+      <h2 className="mb-4 ml-3 text-xl font-bold sm:m-0 sm:my-10 sm:text-2xl">
         Shopping history
       </h2>
       <div>

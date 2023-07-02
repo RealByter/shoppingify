@@ -8,16 +8,26 @@ import ShoppingList from "./components/list/ShoppingList";
 import { BrowserRouter, HashRouter } from "react-router-dom";
 import ShownItemContext from "./contexts/ShownItemContext";
 import { addDoc, collection, query, where } from "firebase/firestore";
-import { useFirestore, useFirestoreCollectionData } from "reactfire";
+import {
+  useFirestore,
+  useFirestoreCollectionData,
+  useSigninCheck,
+} from "reactfire";
 
 const App = () => {
   const firestore = useFirestore();
-  const shoppingListQuery = query(
-    collection(firestore, "shoppingLists"),
-    where("status", "==", "ongoing")
-  );
+  const { status: userStatus, data: signInCheckResult } = useSigninCheck();
+
+  const shoppingListCollection =
+    userStatus === "loading" || !signInCheckResult.signedIn
+      ? collection(firestore, "empty")
+      : query(
+          collection(firestore, "shoppingLists"),
+          where("status", "==", "ongoing"),
+          where("userId", "==", signInCheckResult.user?.uid)
+        );
   const { status: shoppingListStatus, data: shoppingLists } =
-    useFirestoreCollectionData(shoppingListQuery, { idField: "id" });
+    useFirestoreCollectionData(shoppingListCollection, { idField: "id" });
   const listItemsRef =
     shoppingListStatus === "success" && shoppingLists.length > 0
       ? collection(firestore, `shoppingLists/${shoppingLists[0].id}/listItems`)
@@ -33,8 +43,9 @@ const App = () => {
 
   useEffect(() => {
     if (shoppingListStatus === "success") {
-      if (shoppingLists.length === 0) {
+      if (shoppingLists.length === 0 && signInCheckResult.signedIn) {
         addDoc(collection(firestore, "shoppingLists"), {
+          userId: signInCheckResult.user?.uid,
           name: "",
           status: "ongoing",
         });
@@ -52,6 +63,10 @@ const App = () => {
         id:
           shoppingListStatus === "success" && shoppingLists.length > 0
             ? shoppingLists[0].id
+            : "empty",
+        userId:
+          shoppingListStatus === "success" && shoppingLists.length > 0
+            ? shoppingLists[0].userId
             : "empty",
         items:
           itemsStatus === "success" && listItems

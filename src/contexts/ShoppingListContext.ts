@@ -6,6 +6,7 @@ interface Value {
   items: ListItem[];
   name: string;
   id: string;
+  userId: string;
   showingList: boolean;
   setShowingList(arg: any): any;
 }
@@ -14,6 +15,7 @@ const ShoppingListContext = createContext<Value>({
   items: [],
   name: "",
   id: "",
+  userId: '',
   showingList: false,
   setShowingList: () => {},
 });
