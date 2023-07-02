@@ -28,7 +28,7 @@ const ListHistory = () => {
 
   return (
     <div className="md:grid md:grid-cols-[1fr,24rem]">
-      <div className="max-w-4xl grow p-3">
+      <div className="max-w-4xl p-3">
         <button
           onClick={() => {
             navigate("/history");
