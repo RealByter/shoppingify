@@ -30,7 +30,10 @@ const App = () => {
     useFirestoreCollectionData(shoppingListCollection, { idField: "id" });
   const listItemsRef =
     shoppingListStatus === "success" && shoppingLists.length > 0
-      ? collection(firestore, `shoppingLists/${shoppingLists[0].id}/listItems`)
+      ? query(
+          collection(firestore, "listItems"),
+          where("listId", "==", shoppingLists[0].id)
+        )
       : collection(firestore, "empty");
   const { status: itemsStatus, data: listItems } = useFirestoreCollectionData(
     listItemsRef,

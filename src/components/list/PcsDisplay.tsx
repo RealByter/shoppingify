@@ -14,9 +14,7 @@ const PcsDisplay: React.FC<Props> = ({ id, editMode }) => {
   const { id: listId } = useContext(ShoppingListContext);
   const [isEditing, setIsEditing] = useState(false);
   const firestore = useFirestore();
-  const { data: item } = useFirestoreDocData(
-    doc(firestore, `shoppingLists/${listId}/listItems`, id)
-  );
+  const { data: item } = useFirestoreDocData(doc(firestore, `listItems`, id));
 
   useEffect(() => {
     setIsEditing(false);
@@ -31,9 +29,7 @@ const PcsDisplay: React.FC<Props> = ({ id, editMode }) => {
       <button
         onClick={() => {
           if (item) {
-            deleteDoc(
-              doc(firestore, `shoppingLists/${listId}/listItems`, item.id)
-            );
+            deleteDoc(doc(firestore, "listItems", id));
           }
         }}
         className="group outline-none"
@@ -48,12 +44,9 @@ const PcsDisplay: React.FC<Props> = ({ id, editMode }) => {
         className="group outline-none"
         onClick={() => {
           if (item && item.pcs > 1) {
-            updateDoc(
-              doc(firestore, `shoppingLists/${listId}/listItems`, item.id),
-              {
-                pcs: item.pcs - 1,
-              }
-            );
+            updateDoc(doc(firestore, "listItems", id), {
+              pcs: item.pcs - 1,
+            });
           }
         }}
       >
@@ -76,17 +69,14 @@ const PcsDisplay: React.FC<Props> = ({ id, editMode }) => {
         className="group outline-none"
         onClick={() => {
           if (item) {
-            updateDoc(
-              doc(firestore, `shoppingLists/${listId}/listItems`, item.id),
-              {
-                pcs: item.pcs + 1,
-              }
-            );
+            updateDoc(doc(firestore, "listItems", id), {
+              pcs: item.pcs + 1,
+            });
           }
         }}
       >
         <MdAdd
-          className={`cursor-pointer text-xl rounded-sm text-primary transition-[margin,width] duration-150 group-focus:outline-none group-focus-visible:outline-offset-0 group-focus-visible:outline-black ${
+          className={`cursor-pointer rounded-sm text-xl text-primary transition-[margin,width] duration-150 group-focus:outline-none group-focus-visible:outline-offset-0 group-focus-visible:outline-black ${
             isEditing ? "mx-1" : "mx-0 w-0"
           }`}
         />

@@ -20,7 +20,7 @@ const HistoryItem: React.FC<Props> = ({ id, pcs }) => {
       note={item?.note}
       image={item?.image}
     >
-      <p className="flex justify-end mt-[18px] ml-auto mr-4 text-primary font-bold text-sm">{pcs}</p>
+      <p className="flex justify-end mt-[16px] md:mt-[18px] ml-auto mr-4 text-primary font-bold text-sm">{pcs}</p>
     </ItemCard>
   );
 };

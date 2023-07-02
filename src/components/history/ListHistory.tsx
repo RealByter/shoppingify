@@ -1,4 +1,4 @@
-import { collection, doc } from "firebase/firestore";
+import { collection, doc, query, where } from "firebase/firestore";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   useFirestore,
@@ -19,7 +19,7 @@ const ListHistory = () => {
     doc(firestore, `shoppingLists/${listId}`)
   );
   const { status: itemsStatus, data: listItems } = useFirestoreCollectionData(
-    collection(firestore, `shoppingLists/${listId}/listItems`),
+    query(collection(firestore, "listItems"), where("listId", "==", listId)),
     { idField: "id" }
   );
 
@@ -37,11 +37,11 @@ const ListHistory = () => {
         >
           <MdArrowRightAlt className="rotate-180 text-xl" /> back
         </button>
-        <h2 className="mx-auto mb-1 mt-6 text-2xl font-bold sm:mb-2 sm:mt-8 sm:text-3xl w-full max-w-3xl">
+        <h2 className="mx-auto mb-1 mt-6 w-full max-w-3xl text-2xl font-bold sm:mb-2 sm:mt-8 sm:text-3xl">
           {list.name}
         </h2>
         <div className="mx-auto w-full max-w-3xl">
-        <DateDisplay at={list.at} />
+          <DateDisplay at={list.at} />
         </div>
         {categories.map((category, index) => (
           <HistoryCategory
@@ -49,7 +49,11 @@ const ListHistory = () => {
             name={category}
             items={listItems
               .filter((item) => item.category === category)
-              .map((item) => ({ id: item.id, pcs: item.pcs }))}
+              .map((item) => ({
+                id: item.id,
+                pcs: item.pcs,
+                itemId: item.itemId,
+              }))}
           />
         ))}
       </div>

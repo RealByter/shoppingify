@@ -12,9 +12,8 @@ interface Props {
 }
 
 const ListItem: React.FC<Props> = ({ name, id, editMode }) => {
-  const { id: listId } = useContext(ShoppingListContext);
   const firestore = useFirestore();
-  const docRef = doc(firestore, `shoppingLists/${listId}/listItems`, id);
+  const docRef = doc(firestore, 'listItems', id);
   const { data: listItemData } = useFirestoreDocData(docRef);
 
   return (

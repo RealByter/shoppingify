@@ -3,7 +3,7 @@ import ItemInterface from "./Item.interface";
 import Ripple from "../general/Ripple";
 import ShoppingListContext from "../../contexts/ShoppingListContext";
 import { MdAdd } from "react-icons/md";
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { useFirestore } from "reactfire";
 import ItemCard from "../general/ItemCard";
 
@@ -16,8 +16,9 @@ const Item: React.FC<ItemInterface> = ({ name, image, category, note, id }) => {
       <button
         className="relative flex grow justify-center pt-[17.5px]"
         onClick={() => {
-          setDoc(doc(firestore, `shoppingLists/${listId}/listItems`, id), {
-            id,
+          addDoc(collection(firestore, "listItems"), {
+            itemId: id,
+            listId,
             name,
             pcs: 1,
             completed: false,
