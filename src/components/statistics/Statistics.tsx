@@ -5,7 +5,7 @@ import YearlySummary from "./YearlySummary";
 const Statistics = () => {
   return (
     <div className="md:grid md:grid-cols-[1fr,24rem]">
-      <div className="flex max-w-4xl p-3">
+      <div className="flex max-w-4xl flex-wrap p-3">
         <TopItems />
         <TopCategories />
         <YearlySummary />
