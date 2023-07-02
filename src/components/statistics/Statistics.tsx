@@ -16,6 +16,7 @@ const Statistics = () => {
   const { status: listsStatus, data: lists } = useFirestoreCollectionData(
     query(
       collection(firestore, "shoppingLists"),
+      where("status", "==", "completed"),
       where("userId", "==", signInCheckResult.user?.uid)
     ),
     { idField: "id" }
