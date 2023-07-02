@@ -1,5 +1,5 @@
 interface Props {
-  name: string;
+  name?: string;
   color: string;
   percentage: number;
 }
