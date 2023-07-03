@@ -49,9 +49,9 @@ const TopItems: React.FC<Props> = ({ items }) => {
   });
 
   return (
-    <div className="max-w-xs grow basis-64">
-      <h2 className="text-xl md:text-2xl">Top Items</h2>
-      <div className="flex flex-col">
+    <div className="mx-auto max-w-xs grow basis-64">
+      <h2 className="mb-6 text-xl md:text-2xl lg:mb-9">Top Items</h2>
+      <div className="flex flex-col gap-y-6 lg:gap-y-7">
         {highestInfo.map(
           (info, index) =>
             !!info.amount && (

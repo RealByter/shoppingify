@@ -40,7 +40,7 @@ const Statistics = () => {
 
   return (
     <div className="md:grid md:grid-cols-[1fr,24rem]">
-      <div className="flex max-w-4xl flex-wrap p-3">
+      <div className="flex max-w-4xl flex-wrap p-3 mx-auto gap-x-[4vw] gap-y-8">
         <TopItems items={items} />
         <TopCategories items={items} />
         <YearlySummary items={items} />
