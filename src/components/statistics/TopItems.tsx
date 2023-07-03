@@ -60,7 +60,7 @@ const TopItems: React.FC<Props> = ({ items }) => {
                 color="#F9A109"
                 name={info.item?.name}
                 percentage={Number(
-                  ((info.amount / items.length) * 100).toFixed(2)
+                  ((info.amount / items.length) * 100).toFixed(1)
                 )}
               />
             )
