@@ -5,7 +5,7 @@ import {
 } from "reactfire";
 import TopCategories from "./TopCategories";
 import TopItems from "./TopItems";
-import YearlySummary from "./YearlySummary";
+import MonthlySummary from "./MonthlySummary";
 import { collection, query, where } from "firebase/firestore";
 import ListItem from "../list/ListItem.interface";
 import LoadingSpinner from "../general/LoadingSpinner";
@@ -40,10 +40,10 @@ const Statistics = () => {
 
   return (
     <div className="md:grid md:grid-cols-[1fr,24rem]">
-      <div className="flex max-w-4xl flex-wrap p-3 mx-auto gap-x-[4vw] gap-y-8">
+      <div className="mx-auto flex max-w-4xl flex-wrap gap-x-[4vw] gap-y-8 p-3">
         <TopItems items={items} />
         <TopCategories items={items} />
-        <YearlySummary items={items} />
+        <MonthlySummary items={items} />
       </div>
     </div>
   );
