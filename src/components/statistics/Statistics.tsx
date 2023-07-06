@@ -40,7 +40,7 @@ const Statistics = () => {
 
   return (
     <div className="md:grid md:grid-cols-[1fr,24rem]">
-      <div className="mx-auto flex max-w-4xl flex-wrap gap-x-[4vw] gap-y-8 p-3">
+      <div className="mx-auto flex max-w-4xl flex-wrap gap-x-[4vw] gap-y-8 p-3 h-screen overflow-y-scroll">
         <TopItems items={items} />
         <TopCategories items={items} />
         <MonthlySummary items={items} />
