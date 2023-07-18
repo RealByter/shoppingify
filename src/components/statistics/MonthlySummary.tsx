@@ -43,6 +43,7 @@ const MonthlySummary: React.FC = () => {
     idField: "id",
   });
   const [data, setData] = useState<{ day: number; items: number }[]>([]);
+  const [once, setOnce] = useState(false);
 
   useEffect(() => {
     const startOfMonth = new Date();
@@ -65,25 +66,28 @@ const MonthlySummary: React.FC = () => {
       return itemsSnapshot.data().count;
     };
 
-    if (status === "success" && lists) {
+    if (status === "success" && lists.length > 0 && !once) {
+      setOnce(true);
       setData([]);
-      lists.forEach((list) => {
-        countItems(list.id).then((res) => {
-          setData((oldState) => {
-            const day = new Date(list.at).getDate();
-            const oldPair = oldState.find((pair) => pair.day === day);
-            if (oldPair) {
-              oldState = oldState.filter((pair) => pair.day !== day);
-              oldState.push({ day, items: oldPair.items + res });
-            } else {
-              oldState.push({ day, items: res });
-            }
-            return oldState
-              .filter((pair) => pair.items)
-              .sort((pairA, pairB) =>
-                pairA.day < pairB.day ? -1 : pairA.day > pairB.day ? 1 : 0
-              );
-          });
+
+      lists.forEach(async (list) => {
+        const res = await countItems(list.id);
+
+        setData((oldState) => {
+          const day = new Date(list.at).getDate();
+          const oldPair = oldState.find((pair) => pair.day === day);
+          if (oldPair) {
+            oldState = oldState.filter((pair) => pair.day !== day);
+            oldState.push({ day, items: oldPair.items + res });
+          } else {
+            oldState.push({ day, items: res });
+          }
+
+          return oldState
+            .filter((pair) => pair.items > 0)
+            .sort((pairA, pairB) =>
+              pairA.day < pairB.day ? -1 : pairA.day > pairB.day ? 1 : 0
+            );
         });
       });
     }

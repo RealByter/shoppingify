@@ -16,12 +16,10 @@ const firebaseConfig = {
 };
 
 ReactDOM.render(
-  <React.StrictMode>
     <FirebaseAppProvider firebaseConfig={firebaseConfig}>
       <FirebaseWrapper>
         <App />
       </FirebaseWrapper>
-    </FirebaseAppProvider>
-  </React.StrictMode>,
+    </FirebaseAppProvider>,
   document.getElementById("root")
 );

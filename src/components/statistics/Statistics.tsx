@@ -21,9 +21,10 @@ const Statistics = () => {
     ),
     { idField: "id" }
   );
-  const listIds = listsStatus === "success" && lists.map((list) => list.id);
+  const listIds: any =
+    listsStatus === "success" && lists.map((list) => list.id);
   const itemsQuery =
-    listsStatus === "loading"
+    listsStatus === "loading" || !listIds.length
       ? collection(firestore, "empty")
       : query(
           collection(firestore, "listItems"),
@@ -40,10 +41,16 @@ const Statistics = () => {
 
   return (
     <div className="md:grid md:grid-cols-[1fr,24rem]">
-      <div className="mx-auto flex h-screen max-w-4xl flex-wrap gap-x-[4vw] gap-y-8 overflow-y-scroll p-3">
-        <TopItems items={items} />
-        <TopCategories items={items} />
-        <MonthlySummary />
+      <div className="mx-auto flex h-screen max-w-4xl flex-wrap gap-x-[4vw] gap-y-8 overflow-y-auto p-3">
+        {listIds.length ? (
+          <>
+            <TopItems items={items} />
+            <TopCategories items={items} />
+            <MonthlySummary />
+          </>
+        ) : (
+          <h1 className="self-center text-3xl">No shopping lists</h1>
+        )}
       </div>
     </div>
   );
