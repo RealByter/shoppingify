@@ -5,7 +5,7 @@ import NavBar from "./NavBar";
 import Items from "../items/Items";
 import History from "../history/History";
 import ListHistory from "../history/ListHistory";
-import Statistics from "../statistics/statistics";
+import Statistics from "../statistics/Statistics";
 
 const RouteSwitch = () => {
   const { status, data: signInCheckResult } = useSigninCheck();
